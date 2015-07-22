@@ -6,7 +6,7 @@
     "Harry Roberts <harry@csswizardry.com>",
     "Dennis Heibuelt <dennis@csshugs.com>"
   ],
-  "description": "A simple flexbox layout abstraction in the inuitcss framework",
+  "description": "A layout abstraction modifier class in the inuitcss framework",
   "main": "_objects.flex-layout.scss",
   "keywords": [
     "inuitcss",

@@ -1,0 +1,244 @@
+/*------------------------------------*\
+    #FLEX-LAYOUT
+\*------------------------------------*/
+
+/**
+ * The inuitcss flexbox layout system uses `box-sizing: border-box;` and
+ * `display: flex;` to create an extremely powerful, flexible
+ * alternative to the traditional grid system. Combine the layout items with
+ * the widths found in `trumps.widths`. In addition it provides a modifier
+ * to let the items share the same height on each row. This falls back gently
+ * in IE9, where the items don't share the same height.
+ */
+
+// Predefine the variables below in order to alter and enable specific features.
+$inuit-flex-layout-namespace:        $inuit-namespace !default;
+
+$inuit-flex-layout-gutter:           $inuit-base-spacing-unit !default;
+$inuit-flex-layout-gutter--tiny:       quarter($inuit-flex-layout-gutter) !default;
+$inuit-flex-layout-gutter--small:        halve($inuit-flex-layout-gutter) !default;
+$inuit-flex-layout-gutter--large:       double($inuit-flex-layout-gutter) !default;
+$inuit-flex-layout-gutter--huge:     quadruple($inuit-flex-layout-gutter) !default;
+
+$inuit-enable-flex-layout--tiny:     false !default;
+$inuit-enable-flex-layout--small:    false !default;
+$inuit-enable-flex-layout--large:    false !default;
+$inuit-enable-flex-layout--huge:     false !default;
+$inuit-enable-flex-layout--flush:    false !default;
+$inuit-enable-flex-layout--rev:      false !default;
+$inuit-enable-flex-layout--middle:   false !default;
+$inuit-enable-flex-layout--bottom:   false !default;
+$inuit-enable-flex-layout--right:    false !default;
+$inuit-enable-flex-layout--center:   false !default;
+
+
+
+
+
+// Here we set a variable assuming that `box-sizing: border-box;` is not set
+// globally. If it has been previously been defined, the following variable will
+// be overriden and will be set to `true`.
+$inuit-global-border-box: false !default;
+
+
+
+
+
+/**
+ * Begin a flexbox layout group.
+ *
+ * 1. IE9 fallback.
+ */
+.#{$inuit-flex-layout-namespace}o-flex-layout {
+    list-style: none;
+    margin:  0;
+    padding: 0;
+    margin-left: -$inuit-flex-layout-gutter;
+    display: block; /* [1] */
+    display: flex;
+    flex-wrap: wrap;
+}
+
+    /**
+     * 1. Cause columns to stack side-by-side.
+     * 2. Space columns apart.
+     * 3. Align columns to the tops of each other.
+     * 4. Full-width unless told to behave otherwise.
+     * 5. Required to combine fluid widths and fixed gutters.
+     * 6. Let items share the same height in each row.
+     */
+    .#{$inuit-flex-layout-namespace}o-flex-layout__item {
+        display: inline-block; /* [1] */
+        padding-left: $inuit-flex-layout-gutter; /* [2] */
+        vertical-align: top; /* [3] */
+        width: 100%; /* [4] */
+
+        @if $inuit-global-border-box == false {
+           -webkit-box-sizing: border-box; /* [5] */
+              -moz-box-sizing: border-box; /* [5] */
+                   box-sizing: border-box; /* [5] */
+        }
+
+        .#{$inuit-flex-layout-namespace}o-flex-layout--justified & {
+            display: flex; /* [6] */
+        }
+
+    }
+
+
+
+
+
+@if ($inuit-enable-flex-layout--tiny == true) {
+
+    /**
+     * Layouts with tiny gutters.
+     */
+
+    .#{$inuit-flex-layout-namespace}o-flex-layout--tiny {
+        margin-left: -($inuit-flex-layout-gutter--tiny);
+
+        > .#{$inuit-flex-layout-namespace}o-flex-layout__item {
+            padding-left: $inuit-flex-layout-gutter--tiny;
+        }
+
+    }
+
+}
+
+@if ($inuit-enable-flex-layout--small == true) {
+
+    /**
+     * Layouts with small gutters.
+     */
+
+    .#{$inuit-flex-layout-namespace}o-flex-layout--small {
+        margin-left: -($inuit-flex-layout-gutter--small);
+
+        > .#{$inuit-flex-layout-namespace}o-flex-layout__item {
+            padding-left: $inuit-flex-layout-gutter--small;
+        }
+
+    }
+
+}
+
+@if ($inuit-enable-flex-layout--large == true) {
+
+    /**
+     * Layouts with large gutters.
+     */
+
+    .#{$inuit-flex-layout-namespace}o-flex-layout--large {
+        margin-left: -($inuit-flex-layout-gutter--large);
+
+        > .#{$inuit-flex-layout-namespace}o-flex-layout__item {
+            padding-left: $inuit-flex-layout-gutter--large;
+        }
+
+    }
+
+}
+
+@if ($inuit-enable-flex-layout--huge == true) {
+
+    /**
+     * Layouts with huge gutters.
+     */
+
+    .#{$inuit-flex-layout-namespace}o-flex-layout--huge {
+        margin-left: -($inuit-flex-layout-gutter--huge);
+
+        > .#{$inuit-flex-layout-namespace}o-flex-layout__item {
+            padding-left: $inuit-flex-layout-gutter--huge;
+        }
+
+    }
+
+}
+
+@if ($inuit-enable-flex-layout--flush == true) {
+
+    /**
+     * Layouts with no gutters.
+     */
+
+    .#{$inuit-flex-layout-namespace}o-flex-layout--flush {
+        margin-left: 0;
+
+        > .#{$inuit-flex-layout-namespace}o-flex-layout__item {
+            padding-left: 0;
+        }
+
+    }
+
+}
+
+@if ($inuit-enable-flex-layout--rev == true) {
+
+    /**
+     * Reversed rendered order of layout items, e.g. items 1, 2, 3, 4 in your
+     * markup will display in order 4, 3, 2, 1 on your page. This only apllies
+     * for the particular flex row.
+     */
+
+    .#{$inuit-flex-layout-namespace}o-flex-layout--rev {
+        direction: rtl;
+        text-align: left;
+
+        > .#{$inuit-flex-layout-namespace}o-flex-layout__item {
+            direction: ltr;
+            text-align: left;
+        }
+
+    }
+
+}
+
+@if ($inuit-enable-flex-layout--middle == true) {
+
+    /**
+     * Align layout items to the vertical centers of each other.
+     */
+
+    .#{$inuit-flex-layout-namespace}o-flex-layout--middle {
+        align-items: center;
+    }
+
+}
+
+@if ($inuit-enable-flex-layout--bottom == true) {
+
+    /**
+     * Align layout items to the vertical bottoms of each other.
+     */
+
+    .#{$inuit-flex-layout-namespace}o-flex-layout--bottom {
+        align-items: flex-end;
+    }
+
+}
+
+@if ($inuit-enable-flex-layout--right == true) {
+
+    /**
+     * Make the layout items fill up from the right hand side.
+     */
+
+    .#{$inuit-flex-layout-namespace}o-flex-layout--right {
+        justify-content: flex-end;
+    }
+
+}
+
+@if ($inuit-enable-flex-layout--center == true) {
+
+    /**
+     * Make the layout items fill up from the center outward.
+     */
+
+    .#{$inuit-flex-layout-namespace}o-flex-layout--center {
+        justify-content: center;
+    }
+
+}

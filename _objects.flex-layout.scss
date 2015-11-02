@@ -73,7 +73,7 @@
 @if ($inuit-enable-layout--right == true) {
 
     /**
-     * Align layout items to the vertical bottoms of each other.
+     * Make the layout items fill up from the right hand side.
      */
 
     .#{$inuit-layout-namespace}layout--right {
